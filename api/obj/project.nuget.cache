@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "PK0Z9aOAtA0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Dav_i\\API test\\API-Project\\api\\api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dav_i\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.1\\microsoft.aspnetcore.openapi.9.0.1.nupkg.sha512",
+    "C:\\Users\\Dav_i\\.nuget\\packages\\microsoft.openapi\\1.6.22\\microsoft.openapi.1.6.22.nupkg.sha512",
+    "C:\\Users\\Dav_i\\.nuget\\packages\\scalar.aspnetcore\\2.0.12\\scalar.aspnetcore.2.0.12.nupkg.sha512",
+    "C:\\Users\\Dav_i\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\7.2.0\\swashbuckle.aspnetcore.swagger.7.2.0.nupkg.sha512",
+    "C:\\Users\\Dav_i\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\7.2.0\\swashbuckle.aspnetcore.swaggergen.7.2.0.nupkg.sha512",
+    "C:\\Users\\Dav_i\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\7.2.0\\swashbuckle.aspnetcore.swaggerui.7.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
