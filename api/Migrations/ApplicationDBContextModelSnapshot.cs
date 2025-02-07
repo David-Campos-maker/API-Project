@@ -33,7 +33,7 @@ namespace api.Migrations
                     b.Property<string>("CoverPhoto")
                         .HasColumnType("nvarchar(max)");
 
-                    b.PrimitiveCollection<string>("Genders")
+                    b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

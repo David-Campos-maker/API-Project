@@ -21,7 +21,7 @@ namespace api.Migrations
                     CoverPhoto = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Published = table.Column<DateOnly>(type: "date", nullable: false),
                     Platform = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Genders = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

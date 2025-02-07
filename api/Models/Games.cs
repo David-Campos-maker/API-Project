@@ -10,7 +10,7 @@ namespace api.Models {
         public string? CoverPhoto { get; set; } = string.Empty;
         public DateOnly Published { get; set; }
         public string Platform { get; set; } = string.Empty;
-        public List<string> Genders { get; set; } = new List<string>();
+        public string Gender { get; set; } = string.Empty;
         public List<Review> Reviews { get; set; } = new List<Review>();
     }
 }

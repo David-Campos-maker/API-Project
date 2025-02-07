@@ -12,7 +12,7 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250206221439_Init")]
+    [Migration("20250207014226_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -36,7 +36,7 @@ namespace api.Migrations
                     b.Property<string>("CoverPhoto")
                         .HasColumnType("nvarchar(max)");
 
-                    b.PrimitiveCollection<string>("Genders")
+                    b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
