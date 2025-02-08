@@ -12,9 +12,6 @@ namespace api.Models {
         //Navigation Property
         public Games? Game { get; set; }
         // Reference to a User         
-        public int? UserId { get; set; }
-        //Navigation Property
-        public User? User { get; set; }
         public int Rate { get; set; }
         public string Content { get; set; } = string.Empty;
         public DateTime WritedAt { get; set; } = DateTime.Now;
