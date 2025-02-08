@@ -6,6 +6,7 @@ using api.Data;
 using api.DTOs.Game;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
@@ -20,19 +21,17 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<GameDto>), 200)]
-        public IActionResult GetAll() {
+        public async Task<IActionResult> GetAll() {
 
-            var games = _context.Games.AsEnumerable()
-             .Select(game => game.ToGameDto());
+            var games = await _context.Games.ToListAsync();
+            var gamesDto = games.Select(game => game.ToGameDto());
 
-            return Ok(games);
+            return Ok(gamesDto);
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(GameDto) , 200)]
-        public IActionResult GetById([FromRoute] int id) {
-            var game = _context.Games.Find(id);
+        public async Task<IActionResult> GetById([FromRoute] int id) {
+            var game = await _context.Games.FindAsync(id);
 
             if (game == null) return NotFound();
 
@@ -41,12 +40,11 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("addGame")]
-        [ProducesResponseType(typeof(GameDto) , 200)]
-        public IActionResult CreateNewGame([FromBody] CreateGameRequestDto requestDto) {
+        public async Task<IActionResult> CreateNewGame([FromBody] CreateGameRequestDto requestDto) {
             var gameModel = requestDto.ToGameFromCreateDtoRequest();
 
-            _context.Games.Add(gameModel);
-            _context.SaveChanges();
+            await _context.Games.AddAsync(gameModel);
+            await _context.SaveChangesAsync();
 
             // Returns the new Game object using the GetById endpoint
             return CreatedAtAction(nameof(GetById) , new { id = gameModel.Id } , gameModel.ToGameDto());
@@ -54,10 +52,8 @@ namespace api.Controllers
 
         [HttpPut]
         [Route("update/{id}")]
-        [ProducesResponseType(typeof(GameDto) , 200)]
-
-        public IActionResult Update([FromRoute] int id , [FromBody] UpdateGameRequestDto updateRequestDto) {
-            var gameModel = _context.Games.FirstOrDefault(game => game.Id == id);
+        public async Task<IActionResult> Update([FromRoute] int id , [FromBody] UpdateGameRequestDto updateRequestDto) {
+            var gameModel = await _context.Games.FirstOrDefaultAsync(game => game.Id == id);
 
             if (gameModel == null) return NotFound();
 
@@ -68,9 +64,22 @@ namespace api.Controllers
             gameModel.Platform = updateRequestDto.Platform;
             gameModel.Gender = updateRequestDto.Gender;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(gameModel.ToGameDto());
+        }
+
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id) {
+            var gameModel = await _context.Games.FirstOrDefaultAsync(game => game.Id == id);
+
+            if (gameModel == null) return NotFound();
+
+            _context.Games.Remove(gameModel);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
