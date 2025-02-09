@@ -1,6 +1,8 @@
 using api.Data;
 using Scalar.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using api.Interfaces;
+using api.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ApplicationDBContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IGameRepository , GameRepository>();
 
 var app = builder.Build();
 
