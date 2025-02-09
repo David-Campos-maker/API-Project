@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options => {
 });
 
 builder.Services.AddScoped<IGameRepository , GameRepository>();
+builder.Services.AddScoped<IReviewRepository , ReviewRepository>();
 
 var app = builder.Build();
 
