@@ -20,5 +20,14 @@ namespace api.Repository
         {
             return await _context.Reviews.ToListAsync();
         }
+
+        public async Task<Review?> GetReviewByIdAsync(int id)
+        {
+            var reviewModel = await _context.Reviews.FirstOrDefaultAsync(review => review.Id == id);
+
+            if (reviewModel == null) return null;
+
+            return reviewModel;
+        }
     }
 }

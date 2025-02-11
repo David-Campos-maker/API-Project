@@ -26,5 +26,15 @@ namespace api.Controllers
 
             return Ok(reviewsDtos);
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id) {
+            var reviewModel = await _reviewRepository.GetReviewByIdAsync(id);
+
+            if (reviewModel == null) return NotFound();
+
+            return Ok(reviewModel.ToReviewDto());
+        }
     }
 }
