@@ -17,6 +17,7 @@ namespace api.Mappers
                 Published = gameModel.Published,
                 Platform = gameModel.Platform,
                 Gender = gameModel.Gender,
+                Reviews = gameModel.Reviews.Select(review => review.ToReviewDto()).ToList()
             };
         }
 

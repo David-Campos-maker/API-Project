@@ -19,6 +19,10 @@ builder.Services.AddDbContext<ApplicationDBContext>(options => {
 builder.Services.AddScoped<IGameRepository , GameRepository>();
 builder.Services.AddScoped<IReviewRepository , ReviewRepository>();
 
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => {
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
