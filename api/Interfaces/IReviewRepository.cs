@@ -13,5 +13,6 @@ namespace api.Interfaces
         Task<Review?> GetReviewByIdAsync(int id);
         Task<Review?> DeleteReviewAsync(int id);
         Task<Review> AddReviewAsync(Review createReview);
+        Task<Review?> UpdateReviewAsync(int id , UpdateReviewRequestDto updateReview);
     }
 }

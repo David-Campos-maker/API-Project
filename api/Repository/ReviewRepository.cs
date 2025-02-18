@@ -51,5 +51,20 @@ namespace api.Repository
 
             return reviewModel;
         }
+
+        public async Task<Review?> UpdateReviewAsync(int id, UpdateReviewRequestDto updateReview)
+        {
+            var reviewModel = await _context.Reviews.FirstOrDefaultAsync(review => review.Id == id);
+
+            if (reviewModel == null) return null;
+
+            reviewModel.Content = updateReview.Content;
+            reviewModel.Rate = updateReview.Rate;
+            reviewModel.WritedAt = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+
+            return reviewModel;
+        }
     }
 }

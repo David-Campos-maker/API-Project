@@ -48,6 +48,16 @@ namespace api.Controllers
             return CreatedAtAction(nameof(GetById) , new { id = reviewModel.Id } , reviewModel.ToReviewDto());
         }
 
+        [HttpPut]
+        [Route("update/{id}")]
+        public async Task<IActionResult> UpdateReview([FromRoute] int id , [FromBody] UpdateReviewRequestDto updateRequest) {
+            var reviewModel = await _reviewRepository.UpdateReviewAsync(id , updateRequest);
+
+            if (reviewModel == null) return NotFound();
+
+            return Ok(reviewModel.ToReviewDto());
+        }
+
         [HttpDelete] 
         [Route("delete/{id}")]
         public async Task<IActionResult> DeleteById([FromRoute] int id) {

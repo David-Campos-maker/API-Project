@@ -20,12 +20,12 @@ namespace api.Repository
 
         public async Task<List<Games>> GetAllGamesAsync()
         {
-            return await _context.Games.Include(reviews => reviews.Reviews).ToListAsync();
+            return await _context.Games.Include(game => game.Reviews).ToListAsync();
         }
 
         public async Task<Games?> GetGameByIdAsync(int id)
         {
-            return await _context.Games.Include(review => review.Reviews).FirstOrDefaultAsync(game => game.Id == id);
+            return await _context.Games.Include(game => game.Reviews).FirstOrDefaultAsync(g => g.Id == id);
         }
 
         public async Task<Games> AddGameAsync(Games game)
