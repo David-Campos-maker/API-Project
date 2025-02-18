@@ -14,5 +14,6 @@ namespace api.Interfaces
         Task<Games> AddGameAsync(Games game);
         Task<Games?> UpdateGameAsync(int id , UpdateGameRequestDto updateGameDto);
         Task<Games?> DeleteGameByIdAsync(int id);
+        Task<bool> IsGameExist(int id);
     }
 }

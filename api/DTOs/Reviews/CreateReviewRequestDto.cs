@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 namespace api.DTOs.Reviews
 {
     public class CreateReviewRequestDto
-    {
-        public int GameId { get; set; }     
+    {   
         public int Rate { get; set; }
         public string Content { get; set; } = string.Empty;
     }

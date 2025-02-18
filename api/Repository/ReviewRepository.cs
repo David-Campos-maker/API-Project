@@ -18,7 +18,7 @@ namespace api.Repository
             _context = context;
         }
 
-        public async Task<Review> AddReviewAsync(Review createReview)
+        public async Task<Review?> AddReviewAsync(Review createReview)
         {
             await _context.Reviews.AddAsync(createReview);
             await _context.SaveChangesAsync();

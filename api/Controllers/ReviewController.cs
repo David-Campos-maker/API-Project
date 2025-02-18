@@ -15,9 +15,11 @@ namespace api.Controllers
     public class ReviewController : ControllerBase
     {
         private readonly IReviewRepository _reviewRepository;
-        public ReviewController(IReviewRepository reviewRepository)
+        private readonly IGameRepository _gameRepository;
+        public ReviewController(IReviewRepository reviewRepository , IGameRepository gameRepository)
         {
             _reviewRepository = reviewRepository;
+            _gameRepository = gameRepository;
         }
 
         [HttpGet]
@@ -39,11 +41,14 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        [Route("addReview")]
-        public async Task<IActionResult> CreateReview([FromBody] CreateReviewRequestDto createReviewRequestDto) {
-            var reviewModel = createReviewRequestDto.ToReviewFromCreateReviewDto();
+        [Route("addReview/{gameId}")]
+        public async Task<IActionResult> CreateReview([FromRoute] int gameId , [FromBody] CreateReviewRequestDto createReviewRequestDto) {
+            if (!await _gameRepository.IsGameExist(gameId)) return BadRequest("Game does not exist");
+
+            var reviewModel = createReviewRequestDto.ToReviewFromCreateReviewDto(gameId);
 
             await _reviewRepository.AddReviewAsync(reviewModel);
+
 
             return CreatedAtAction(nameof(GetById) , new { id = reviewModel.Id } , reviewModel.ToReviewDto());
         }

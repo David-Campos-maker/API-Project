@@ -65,5 +65,10 @@ namespace api.Repository
 
             return gameModel;
         }
+
+        public async Task<bool> IsGameExist(int id)
+        {
+            return await _context.Games.AnyAsync(game => game.Id == id);
+        }
     }
 }

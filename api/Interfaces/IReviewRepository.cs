@@ -12,7 +12,7 @@ namespace api.Interfaces
         Task<List<Review>> GetAllReviewsAsync();
         Task<Review?> GetReviewByIdAsync(int id);
         Task<Review?> DeleteReviewAsync(int id);
-        Task<Review> AddReviewAsync(Review createReview);
+        Task<Review?> AddReviewAsync(Review createReview);
         Task<Review?> UpdateReviewAsync(int id , UpdateReviewRequestDto updateReview);
     }
 }
