@@ -31,8 +31,10 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id) {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            
             var reviewModel = await _reviewRepository.GetReviewByIdAsync(id);
 
             if (reviewModel == null) return NotFound();
@@ -41,8 +43,10 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        [Route("addReview/{gameId}")]
+        [Route("addReview/{gameId:int}")]
         public async Task<IActionResult> CreateReview([FromRoute] int gameId , [FromBody] CreateReviewRequestDto createReviewRequestDto) {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             if (!await _gameRepository.IsGameExist(gameId)) return BadRequest("Game does not exist");
 
             var reviewModel = createReviewRequestDto.ToReviewFromCreateReviewDto(gameId);
@@ -54,8 +58,10 @@ namespace api.Controllers
         }
 
         [HttpPut]
-        [Route("update/{id}")]
+        [Route("update/{id:int}")]
         public async Task<IActionResult> UpdateReview([FromRoute] int id , [FromBody] UpdateReviewRequestDto updateRequest) {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var reviewModel = await _reviewRepository.UpdateReviewAsync(id , updateRequest);
 
             if (reviewModel == null) return NotFound();
@@ -64,8 +70,10 @@ namespace api.Controllers
         }
 
         [HttpDelete] 
-        [Route("delete/{id}")]
+        [Route("delete/{id:int}")]
         public async Task<IActionResult> DeleteById([FromRoute] int id) {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var reviewModel = await _reviewRepository.DeleteReviewAsync(id);
 
             if (reviewModel == null) return NotFound();
