@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Components.Routing;
 namespace api.Models {
     public class Review {
         public int Id { get; set; }
+
         // Reference to a Game 
         public int? GameId { get; set; }
+        
         //Navigation Property
         public Games? Game { get; set; }    
         public int Rate { get; set; }

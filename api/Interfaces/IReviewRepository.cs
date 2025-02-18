@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.DTOs.Reviews;
 using api.Models;
 
 namespace api.Interfaces
@@ -10,5 +11,7 @@ namespace api.Interfaces
     {
         Task<List<Review>> GetAllReviewsAsync();
         Task<Review?> GetReviewByIdAsync(int id);
+        Task<Review?> DeleteReviewAsync(int id);
+        Task<Review> AddReviewAsync(Review createReview);
     }
 }

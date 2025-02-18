@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using api.DTOs.Reviews;
 using api.Interfaces;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,27 @@ namespace api.Repository
         {
             _context = context;
         }
+
+        public async Task<Review> AddReviewAsync(Review createReview)
+        {
+            await _context.Reviews.AddAsync(createReview);
+            await _context.SaveChangesAsync();
+
+            return createReview;
+        }
+
+        public async Task<Review?> DeleteReviewAsync(int id)
+        {
+            var reviewModel = await _context.Reviews.FirstOrDefaultAsync(review => review.Id == id);
+
+            if (reviewModel == null) return null;
+
+            _context.Reviews.Remove(reviewModel);
+            await _context.SaveChangesAsync();
+
+            return reviewModel;
+        }
+
         public async Task<List<Review>> GetAllReviewsAsync()
         {
             return await _context.Reviews.ToListAsync();
