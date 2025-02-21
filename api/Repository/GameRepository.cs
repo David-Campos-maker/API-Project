@@ -28,6 +28,27 @@ namespace api.Repository
 
             if (!string.IsNullOrWhiteSpace(query.Gender)) 
                 games = games.Where(g => g.Gender.Contains(query.Gender));
+                
+            if (!string.IsNullOrWhiteSpace(query.SortBy)) {
+                switch (query.SortBy) {
+                    case var sortValue when 
+                    string.Equals(sortValue , "Name" , StringComparison.OrdinalIgnoreCase):
+                        games = query.IsDescending ? games.OrderByDescending(g => g.Name)
+                        : games.OrderBy(g => g.Name);
+
+                        break;
+
+                    case var sortValue when
+                    string.Equals(sortValue , "Published" , StringComparison.OrdinalIgnoreCase):
+                        games = query.IsDescending ? games.OrderByDescending(g => g.Published.Year)
+                        : games.OrderBy(g => g.Published.Year);
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
 
             return await games.ToListAsync();
         }
