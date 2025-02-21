@@ -50,7 +50,10 @@ namespace api.Repository
                 }
             }
 
-            return await games.ToListAsync();
+            // Pagination
+            var skipNunber = (query.PageNumber - 1) * query.PageSize;
+
+            return await games.Skip(skipNunber).Take(query.PageSize).ToListAsync();
         }
 
         public async Task<Games?> GetGameByIdAsync(int id)
