@@ -7,6 +7,7 @@ using api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +56,7 @@ builder.Services.AddAuthentication(options => {
 
 builder.Services.AddScoped<IGameRepository , GameRepository>();
 builder.Services.AddScoped<IReviewRepository , ReviewRepository>();
+builder.Services.AddScoped<ITokenService , TokenService>();
 
 builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => {
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
