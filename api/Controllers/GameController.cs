@@ -7,6 +7,7 @@ using api.DTOs.Game;
 using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -57,6 +58,7 @@ namespace api.Controllers
 
         [HttpPut]
         [Route("update/{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Update([FromRoute] int id , [FromBody] UpdateGameRequestDto updateRequestDto) {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -69,6 +71,7 @@ namespace api.Controllers
 
         [HttpDelete]
         [Route("delete/{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Delete([FromRoute] int id) {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             
